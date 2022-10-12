@@ -13,7 +13,7 @@ exports.getAllInterview = (req, res) => {
 exports.getInterviewByEmail = (req, res) => {
 	Interview.find({
 		'participants.email': {
-			$in: req.body.email,
+			$in: req.query.email,
 		},
 	})
 		.then((user) => res.json(user))
