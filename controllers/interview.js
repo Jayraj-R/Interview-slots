@@ -2,7 +2,24 @@ const Interview = require('../models/interview_model');
 
 exports.getAllInterview = (req, res) => {
 	Interview.find()
-		.then((user) => res.json(user))
+		.then((interview) => res.json(interview))
+		.catch((err) =>
+			res
+				.status(404)
+				.json({ message: 'Interview not found', error: err.message })
+		);
+};
+
+// USING PAGINATION
+exports.getAllInterview = (req, res) => {
+	Interview.find()
+		.limit(req.query.limit * 1)
+		.skip((req.query.page - 1) * req.query.limit)
+		.exec()
+		.then((interview) => {
+			res.json(interview);
+			console.log(interview);
+		})
 		.catch((err) =>
 			res
 				.status(404)
@@ -16,7 +33,7 @@ exports.getInterviewByEmail = (req, res) => {
 			$in: req.query.email,
 		},
 	})
-		.then((user) => res.json(user))
+		.then((interview) => res.json(interview))
 		.catch((err) =>
 			res
 				.status(404)
