@@ -1,14 +1,14 @@
 const Interview = require('../models/interview_model');
 
-exports.getAllInterview = (req, res) => {
-	Interview.find()
-		.then((interview) => res.json(interview))
-		.catch((err) =>
-			res
-				.status(404)
-				.json({ message: 'Interview not found', error: err.message })
-		);
-};
+// exports.getAllInterview = (req, res) => {
+// 	Interview.find()
+// 		.then((interview) => res.json(interview))
+// 		.catch((err) =>
+// 			res
+// 				.status(404)
+// 				.json({ message: 'Interview not found', error: err.message })
+// 		);
+// };
 
 // USING PAGINATION
 exports.getAllInterview = (req, res) => {
